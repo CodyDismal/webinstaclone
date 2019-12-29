@@ -76,3 +76,5 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+*.sqlite3
