@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {});
   Post.associate = function(models) {
-    Post.belongsTo(models.user);
+    Post.belongsTo(models.User);
   };
   return Post;
 };
