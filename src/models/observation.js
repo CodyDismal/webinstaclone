@@ -1,11 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Observation = sequelize.define('Observation', {
-    id: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true
+    },
   }, {});
   Observation.associate = function(models) {
-    Observation.belongsTo(models.user, {as: 'observatorId'});
-    Observation.belongsTo(models.user, {as: 'observableId'});
+    Observation.belongsTo(models.User, {as: 'observatorId'});
+    Observation.belongsTo(models.User, {as: 'observableId'});
   };
   return Observation;
 };

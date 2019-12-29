@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     link: DataTypes.STRING
   }, {});
   ActivationLink.associate = function(models) {
-    ActivationLink.belongsTo(models.user);
+    ActivationLink.belongsTo(models.User);
   };
   return ActivationLink;
 };

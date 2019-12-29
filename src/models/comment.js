@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     text: DataTypes.STRING,
   }, {});
   Comment.associate = function(models) {
-    Comment.belongsTo(models.user);
-    Comment.belongsTo(models.post);
+    Comment.belongsTo(models.User);
+    Comment.belongsTo(models.Post);
   };
   return Comment;
 };

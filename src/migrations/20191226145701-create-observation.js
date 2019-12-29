@@ -11,14 +11,14 @@ module.exports = {
       observatorId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'user',
+          model: 'Users',
           key: 'id'
         },
       },
       observableId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'user',
+          model: 'Users',
           key: 'id'
         },
       },
