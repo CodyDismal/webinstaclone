@@ -13,6 +13,7 @@ module.exports = {
                 if (user) {
                     req.session.loggedin = true;
                     req.session.email = email;
+                    req.session.userId = user.id;
                     return res.send({
                         redirectToFillInfo: !user.isActive
                     });

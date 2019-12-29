@@ -15,9 +15,16 @@ const routes = [
         name: 'home',
         component: Home
     },
-  {
-    // TODO: dodać widok wypełnienia danych osobowych
-  }
+    {
+        path: '/personal-data',
+        name: 'personal-data',
+        component: () => import(/* webpackChunkName: "about" */ '../views/PersonalData.vue')
+    },
+    {
+        path: '/user/:id',
+        name: 'user',
+        component: () => import('../views/User.vue')
+    },
     {
         path: '/about',
         name: 'about',

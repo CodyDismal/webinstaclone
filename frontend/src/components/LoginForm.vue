@@ -34,9 +34,8 @@
                     email: self.email,
                     password: self.password
                 }).then(result => {
-                    console.log(result);
+                    self.$router.push('personal-data');
                 }).catch(error => {
-                    console.log(error);
                 })
             }
         }
