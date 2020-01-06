@@ -34,7 +34,14 @@
                     email: self.email,
                     password: self.password
                 }).then(result => {
-                    self.$router.push('personal-data');
+                    self.$store.commit('setLoggedIn', true);
+                    self.$store.commit('setLoggedUserId', result.data.userId);
+                    if (result.data.redirectToFillInfo) {
+                        self.$router.push('personal-data');
+                        return;
+                    }
+
+                    self.$router.push('feed');
                 }).catch(error => {
                 })
             }

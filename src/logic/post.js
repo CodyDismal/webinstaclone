@@ -17,7 +17,7 @@ module.exports = {
     getFileFromPost(postId, UPLOAD_PATH, req, res) {
         models.Post.findOne({
             where: {
-                id: postId
+                fileName: postId
             }
         }).then(post => {
             if (post) {

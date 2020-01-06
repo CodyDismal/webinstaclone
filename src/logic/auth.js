@@ -15,6 +15,7 @@ module.exports = {
                     req.session.email = email;
                     req.session.userId = user.id;
                     return res.send({
+                        userId: user.id,
                         redirectToFillInfo: !user.isActive
                     });
                 }

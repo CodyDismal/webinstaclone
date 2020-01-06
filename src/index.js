@@ -2,6 +2,7 @@ const express = require('express');
 const authRouter = require('./api/auth');
 const profileRouter = require('./api/profile');
 const postRouter = require('./api/post');
+const feedRouter = require('./api/feed');
 const path = require('path');
 const session = require('express-session');
 const cors = require('cors');
@@ -24,7 +25,8 @@ app.use(express.static('public'));
 
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
-app.use('/post', postRouter);
+    app.use('/post', postRouter);
+app.use('/feed', feedRouter);
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/views/index.html')));
 

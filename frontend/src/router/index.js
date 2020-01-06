@@ -11,11 +11,6 @@ const routes = [
         component: Home
     },
     {
-        path: '/',
-        name: 'home',
-        component: Home
-    },
-    {
         path: '/personal-data',
         name: 'personal-data',
         component: () => import(/* webpackChunkName: "about" */ '../views/PersonalData.vue')
@@ -34,6 +29,11 @@ const routes = [
         path: '/post/:id',
         name: 'post',
         component: () => import('../views/Post.vue')
+    },
+    {
+        path: '/feed',
+        name: 'feed',
+        component: () => import('../views/Feed.vue')
     },
     {
         path: '/about',
