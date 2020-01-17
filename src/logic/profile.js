@@ -32,7 +32,13 @@ module.exports = {
             },
             attributes: [
                 'nickname', 'biography', 'firstName', 'lastName'
+            ],
+            include: [
+                {
+                    model: models.Post
+                }
             ]
+
         }).then(userData => {
             return res.send(userData);
         });

@@ -26,10 +26,18 @@ module.exports = {
                         [Op.or]: userIntIds
                     }
                 },
+                order: [
+                    ['id', 'DESC'],
+                ],
                 include: [
                     {
                         model: models.User,
                         as: 'User'
+                    },
+                    {
+                        model: models.Like,
+                        as: 'Like',
+                        required: false
                     }
                 ]
 

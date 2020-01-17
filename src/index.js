@@ -25,7 +25,7 @@ app.use(express.static('public'));
 
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
-    app.use('/post', postRouter);
+app.use('/post', postRouter);
 app.use('/feed', feedRouter);
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/views/index.html')));

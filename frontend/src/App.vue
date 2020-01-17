@@ -1,28 +1,31 @@
 <template>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">WebInstaClone</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button" v-if="loggedIn">
-                    <router-link :to="{name: 'user', params: { id: userId } }">Mój profil</router-link>
-                </button>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button" v-else>
-                    <router-link to="/">Zaloguj</router-link>
-                </button>
-            </form>
-        </nav>
-        <router-view/>
+        <Navbar></Navbar>
+        <div class="view">
+            <router-view/>
+        </div>
     </div>
 </template>
 
 <script>
+    import Navbar from "./components/Navbar";
+
     export default {
         name: 'App',
+        components: {Navbar},
+
+        mounted() {
+            const self = this;
+            self.axios.get('/feed').then(res => {
+                if (err.response.status === 401) {
+
+                }
+            }).catch(err => {
+                if (err.response.status === 401) {
+
+                }
+            });
+        },
 
         computed: {
             loggedIn() {
@@ -47,7 +50,7 @@
     }
 
     #nav {
-        padding: 30px;
+        margin-bottom: 30px;
     }
 
     #nav a {
@@ -57,5 +60,9 @@
 
     #nav a.router-link-exact-active {
         color: #42b983;
+    }
+
+    .view {
+        padding-top: 75px;
     }
 </style>
