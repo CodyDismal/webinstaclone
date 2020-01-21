@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Observation.associate = function(models) {
-    Observation.belongsTo(models.User, {as: 'observatorId'});
-    Observation.belongsTo(models.User, {as: 'observableId'});
+    Observation.belongsTo(models.User, {as: 'observator'});
+    Observation.belongsTo(models.User, {as: 'observable'});
   };
   return Observation;
 };

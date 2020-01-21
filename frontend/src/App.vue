@@ -14,19 +14,6 @@
         name: 'App',
         components: {Navbar},
 
-        mounted() {
-            const self = this;
-            self.axios.get('/feed').then(res => {
-                if (err.response.status === 401) {
-
-                }
-            }).catch(err => {
-                if (err.response.status === 401) {
-
-                }
-            });
-        },
-
         computed: {
             loggedIn() {
                 return this.$store.state.loggedIn;

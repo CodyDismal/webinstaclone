@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a href="" class="nav-link" v-if="isLoggedIn">
+                    <a href="" class="nav-link" v-if="isLoggedIn" @click="logout">
                         Wyloguj
                     </a>
                 </li>
@@ -44,20 +44,24 @@
 </template>
 
 <script>
-    function getCookie(name) {
-        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
-    }
-
-
     export default {
         name: "Navbar",
+        methods: {
+            logout() {
+                const self = this;
+                self.axios.post('/auth/logout').then(res => {
+                    self.$router.push('home');
+                    self.$store.commit('setLoggedIn', false);
+                    self.$store.commit('setLoggedUserId', -1);
+                });
+            }
+        },
         computed: {
             isLoggedIn() {
-                return !!getCookie('loggedIn');
+                return !!this.$store.state.loggedIn;
             },
             userId() {
-                return getCookie('loggedUserId');
+                return this.$store.state.loggedUserId;
             }
         }
     }

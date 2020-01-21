@@ -5,9 +5,11 @@
                 <UserHeader :nickname="nickname"
                             :first-name="firstName"
                             :last-name="lastName"
-                            :description="description"></UserHeader>
+                            :description="description"
+                            :user-id="userId"></UserHeader>
             </div>
             <div class="col-7 col-posts">
+                <p v-if="feed.length === 0">Brak postów... Póki co.</p>
                 <SinglePost :key="post.id" v-for="post in feed" :src="'/post/image/' + post.fileName"
                             :description="post.description" :likes-count="post.Like.count"></SinglePost>
             </div>
@@ -30,6 +32,7 @@
                 lastName: '',
                 nickname: '',
                 description: '',
+                userId: null,
                 feed: []
             };
         },
@@ -37,6 +40,7 @@
             const self = this;
             self.axios.get('/profile/data/' + self.$route.params.id).then(data => {
                 data = data.data;
+                self.userId = data.id;
                 self.firstName = data.firstName;
                 self.lastName = data.lastName;
                 self.nickname = data.nickname;

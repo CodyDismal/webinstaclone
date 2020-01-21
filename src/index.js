@@ -3,6 +3,8 @@ const authRouter = require('./api/auth');
 const profileRouter = require('./api/profile');
 const postRouter = require('./api/post');
 const feedRouter = require('./api/feed');
+const likesRouter = require('./api/likes');
+const followingRouter = require('./api/following');
 const path = require('path');
 const session = require('express-session');
 const cors = require('cors');
@@ -27,6 +29,8 @@ app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 app.use('/post', postRouter);
 app.use('/feed', feedRouter);
+app.use('/likes', likesRouter);
+app.use('/follow', followingRouter);
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/views/index.html')));
 

@@ -40,7 +40,6 @@
                         self.$router.push('personal-data');
                         return;
                     }
-
                     self.$router.push('feed');
                 }).catch(error => {
                 })

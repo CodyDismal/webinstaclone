@@ -12,9 +12,9 @@
                 {{ description }}
             </p>
             <div class="post-footer">
-                <a class="btn btn-primary comment">Komentuj</a>
+                <a class="btn btn-primary comment" area-disabled="true">Komentuj</a>
                 <a class="btn btn-outline-primary like" @click="likePost">
-                    ❤{{ likesCount }}
+                    ❤ {{ likesCount }}
                 </a>
             </div>
         </div>
@@ -26,10 +26,15 @@
         name: "SinglePost",
         methods: {
             likePost() {
-                // TODO: wykorzystać API do wysyłąnia
+                const self = this;
+                self.axios
+                    .put('/likes/' + self.postId)
+                    .then(res => {
+                        self.likesCount = parseInt(res.data.likes);
+                    });
             }
         },
-        props: ['src', 'description', 'nickname', 'userId', 'likesCount']
+        props: ['src', 'description', 'nickname', 'userId', 'likesCount', 'postId']
     }
 </script>
 

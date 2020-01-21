@@ -2,6 +2,17 @@ const models = require('../models');
 const sha256 = require('../helpers/sha256');
 
 module.exports = {
+    getLoggedUserInfo(req, res) {
+        return undefined;
+    },
+
+    logoutUser(req, res) {
+        req.session.loggedin = false;
+        req.session.email = null;
+        req.session.userId = null;
+        return res.send();
+    },
+
     loginUser(email, password, req, res) {
         if (email && password) {
             return models.User.findOne({
@@ -44,9 +55,9 @@ module.exports = {
                     password: sha256(password),
                     isActive: false
                 }).then(user => {
-                    models.ActivationLink.create({
-                        UserId: user.id,
-                        link: user.id + Math.random().toString(36).substring(2, 15)
+                    models.Observation.create({
+                        observatorId: user.id,
+                        observableId: user.id
                     }).then(link => {
                         res.status(200);
                         return res.send();

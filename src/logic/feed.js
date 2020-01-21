@@ -13,7 +13,7 @@ module.exports = {
             },
             attributes: ['observableId']
         }).then(userIds => {
-            if (!userIds) {
+            if (!userIds.length) {
                 return [];
             }
             const userIntIds = [];
