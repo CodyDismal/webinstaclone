@@ -1,5 +1,5 @@
 <template>
-    <div class="jumbotron">
+    <div class="jumbotron user">
         <h1 class="display-4">
             @{{ nickname }}
         </h1>
@@ -8,37 +8,53 @@
         </p>
         <hr class="my-4">
         <p>{{ description }}</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <a class="btn btn-primary btn-lg" href="#" role="button" @click="follow" v-if="!followingThisUser">Obserwuj</a>
     </div>
 </template>
 
 <script>
     export default {
         name: "UserHeader",
+        props: ['nickname', 'firstName', 'lastName', 'description', 'userId'],
         data() {
-            return {
-                firstName: '',
-                lastName: '',
-                nickname: '',
-                description: ''
-            };
+          return {
+              followingThisUser: false
+          }
         },
-
-        mounted() {
-            const self = this;
-            self.axios.get('/profile/data/' + self.$route.params.id).then(data => {
-                data = data.data;
-                self.firstName = data.firstName;
-                self.lastName = data.lastName;
-                self.nickname = data.nickname;
-                self.description = data.biography;
-            });
+        watch: {
+            'userId': function (nv, ov) {
+                if (nv !== null) {
+                    this.isFollowing();
+                }
+            }
         },
-
-        methods: {}
+        methods: {
+            follow() {
+                const self = this;
+                self.axios
+                    .post('/follow/' + self.userId)
+                    .then(res => {
+                        if (res.data) {
+                            self.followingThisUser = true;
+                        }
+                    });
+            },
+            isFollowing() {
+                const self = this;
+                self.axios
+                    .get('/follow/' + self.userId)
+                    .then(res => {
+                        if (res.data) {
+                            self.followingThisUser = true;
+                        }
+                    });
+            }
+        }
     }
 </script>
 
 <style scoped>
-
+    .user {
+        text-align: left;
+    }
 </style>

@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true
         },
+        count: {
+            type: DataTypes.INTEGER
+        }
     }, {});
     Like.associate = function (models) {
         Like.belongsTo(models.User);

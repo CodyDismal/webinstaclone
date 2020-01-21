@@ -10,6 +10,11 @@ module.exports = {
             description: description,
             UserId: userId
         }).then(post => {
+            models.Like.create({
+                PostId: post.id,
+                UserId: userId,
+                count: 0,
+            });
             return res.send({newPostId: post.id});
         })
     },
@@ -17,7 +22,7 @@ module.exports = {
     getFileFromPost(postId, UPLOAD_PATH, req, res) {
         models.Post.findOne({
             where: {
-                id: postId
+                fileName: postId
             }
         }).then(post => {
             if (post) {
@@ -41,6 +46,9 @@ module.exports = {
             include: [
                 {
                     model: models.Comment
+                },
+                {
+                    model: models.Like
                 }
             ]
         }).then(post => {

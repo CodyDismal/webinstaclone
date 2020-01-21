@@ -12,7 +12,7 @@ const routes = [
     },
     {
         path: '/',
-        name: 'home',
+        name: 'login',
         component: Home
     },
     {
@@ -34,6 +34,11 @@ const routes = [
         path: '/post/:id',
         name: 'post',
         component: () => import('../views/Post.vue')
+    },
+    {
+        path: '/feed',
+        name: 'feed',
+        component: () => import('../views/Feed.vue')
     },
     {
         path: '/about',

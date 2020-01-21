@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.associate = function(models) {
     Post.belongsTo(models.User);
     Post.hasMany(models.Comment);
+    Post.hasOne(models.Like);
   };
   return Post;
 };
