@@ -4,7 +4,7 @@
   "description": "Simple web clone of Instagram. Not great not terrible.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest -i",
     "dev": "node index.js"
   },
   "repository": {
@@ -21,9 +21,13 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "multer": "latest",
     "nodemailer": "^6.4.2",
     "sequelize": "^5.21.2",
-    "sqlite3": "^4.1.1",
-    "multer": "latest"
+    "sequelize-mock": "^0.10.2",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }

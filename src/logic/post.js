@@ -5,22 +5,25 @@ const models = require('../models');
 
 module.exports = {
     handlePostUploading(filename, userId, description, req, res) {
-        models.Post.create({
+        let post;
+        return models.Post.create({
             fileName: filename,
             description: description,
             UserId: userId
-        }).then(post => {
-            models.Like.create({
-                PostId: post.id,
-                UserId: userId,
-                count: 0,
-            });
-            return res.send({newPostId: post.id});
         })
+            .then(_post => {
+                post = _post;
+                return models.Like.create({
+                    PostId: post.id,
+                    UserId: userId,
+                    count: 0,
+                });
+            })
+            .then(() => res.send({ newPostId: post.id }))
     },
 
     getFileFromPost(postId, UPLOAD_PATH, req, res) {
-        models.Post.findOne({
+        return models.Post.findOne({
             where: {
                 fileName: postId
             }
@@ -32,9 +35,10 @@ module.exports = {
                     return;
                 }
             }
-            res.status(404);
-            return res.send();
-        });
+            return res.status(404).send();
+        }).catch((err) => {
+            return res.status(500).send("File not found at server");
+        })
     },
 
     getPostData(postId, req, res) {

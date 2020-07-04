@@ -30,11 +30,10 @@ module.exports = {
                         redirectToFillInfo: !user.isActive
                     });
                 }
-                res.status(500).send('Błędne hasło lub e-mail!');
+                return res.status(500).send('Błędne hasło lub e-mail!');
             })
         } else {
-            res.status(500).send('Błędne hasło lub e-mail!');
-            res.end();
+            return res.status(500).send('Błędne hasło lub e-mail!');
         }
     },
 
@@ -50,12 +49,12 @@ module.exports = {
                     return res.send();
                 }
 
-                models.User.create({
+                return models.User.create({
                     email: email,
                     password: sha256(password),
                     isActive: false
                 }).then(user => {
-                    models.Observation.create({
+                    return models.Observation.create({
                         observatorId: user.id,
                         observableId: user.id
                     }).then(link => {
@@ -65,8 +64,8 @@ module.exports = {
                 });
             });
         } else {
-            res.status(500).send('Brakujące hasło lub e-mail!');
-            res.end();
+            res.status(500);
+            return res.send('Brakujące hasło lub e-mail!');
         }
     }
 };
